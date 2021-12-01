@@ -68,7 +68,7 @@ with open("Puzzle16_Input.txt") as input_file:
     ranges_section = True
     your_ticket_section = True
     other_ticket_section = False
-    count=0
+    count = 0
     for line in input_file:
         if ranges_section:
             if line == '\n':
@@ -83,7 +83,7 @@ with open("Puzzle16_Input.txt") as input_file:
                 ranges.update({count: line[1]})
                 if 'departure' in line[0]:
                     departure_indices.append(count)
-                count+=1
+                count += 1
         elif your_ticket_section:
             if line == '\n':
                 your_ticket_section = False
@@ -136,9 +136,9 @@ for i, ticket in enumerate(nearby_tickets):
                 if value in range_lists:
                     ticket_dicts[j].append(count)
                     #print(j, count)
-                    
-                count+=1
-    elif i>0:
+
+                count += 1
+    elif i > 0:
         for j, value in enumerate(ticket):
             items_to_pop = []
             for rule_no in ticket_dicts[j]:
@@ -146,25 +146,25 @@ for i, ticket in enumerate(nearby_tickets):
                     items_to_pop.append(rule_no)
             for item in items_to_pop:
                 ticket_dicts[j].remove(item)
-#print(ticket_dicts)
+# print(ticket_dicts)
 for i, possibles in enumerate(ticket_dicts):
     if len(possibles) == 1:
         for j, poss in enumerate(ticket_dicts):
-            if j!=i:
+            if j != i:
                 if possibles[0] in poss:
                     ticket_dicts[j].remove(possibles[0])
 
 
-#print(ticket_dicts)
+# print(ticket_dicts)
 
-values = [x for x in range(0,len(my_ticket))]
+values = [x for x in range(0, len(my_ticket))]
 sort_dict = {}
 for x in values:
-    sort_dict.update({x:[]})
+    sort_dict.update({x: []})
 
 finished = False
 while not finished:
-    #print(ticket_dicts)
+    # print(ticket_dicts)
     for i, thing in enumerate(ticket_dicts):
         for t in thing:
             sort_dict[t].append(i)
@@ -172,13 +172,13 @@ while not finished:
         if len(v) == 1:
             ticket_dicts[v[0]] = [i]
             for j, poss in enumerate(ticket_dicts):
-                if j!=v[0]:
+                if j != v[0]:
                     if i in poss:
                         ticket_dicts[j].remove(i)
     for i, possibles in enumerate(ticket_dicts):
         if len(possibles) == 1:
             for j, poss in enumerate(ticket_dicts):
-                if j!=i:
+                if j != i:
                     if possibles[0] in poss:
                         ticket_dicts[j].remove(possibles[0])
     finished = True
@@ -193,7 +193,7 @@ ans = 1
 # print(departure_indices)
 ticket_dicts = [x[0] for x in ticket_dicts]
 for d in departure_indices:
-    ans*=my_ticket[ticket_dicts.index(d)]
+    ans *= my_ticket[ticket_dicts.index(d)]
 
 print("The answer is: ", ans)
 
@@ -201,5 +201,3 @@ print("The answer is: ", ans)
 #     print("yay")
 
 # 204376594109 is too low
-
-
